@@ -1,0 +1,91 @@
+* {
+  margin: 5px;
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
+.flex-container {
+  display: flex;
+  border: 1px solid red;
+}
+
+.grid-container {
+  display: grid;
+}
+
+.main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+}
+
+.left-side {
+  padding: 5px;
+  border: 1px solid blue;
+  flex-direction: column;
+}
+
+.top-area {
+  padding: 5px;
+  border: 1px solid red;
+  justify-content: space-around;
+}
+
+.top-area__counter {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: lightgrey;
+}
+
+.top-area__button {
+  width: 100px;
+  height: 50px;
+  margin: auto;
+  border: 1px solid black;
+  line-height: 50px;
+  text-align: center;
+  background-color: yellow;
+}
+
+.top-area__button:hover {
+  cursor: pointer;
+}
+
+.game-area {
+  padding: 5px;
+  border: 1px solid purple;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.mine {
+  width: 50px;
+  height: 50px;
+  border: 1px solid darkgrey;
+  border-style: inset;
+  background-color: grey;
+}
+
+.mine:hover {
+  cursor: pointer;
+}
+
+.right-side {
+  padding: 5px;
+  border: 1px solid green;
+  flex-direction: column;
+}
+
+.game-size {
+  padding: 5px;
+  border: 1px solid red;
+}
+
+.difficulty {
+  padding: 5px;
+  border: 1px solid magenta;
+}
