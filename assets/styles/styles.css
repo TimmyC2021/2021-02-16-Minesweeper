@@ -62,7 +62,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.mine {
+.game-area__mine {
   width: 50px;
   height: 50px;
   border: 1px solid darkgrey;
@@ -70,22 +70,28 @@
   background-color: grey;
 }
 
-.mine:hover {
+.game-area__mine:hover {
   cursor: pointer;
 }
 
 .right-side {
   padding: 5px;
+  width: 170px;
   border: 1px solid green;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .game-size {
   padding: 5px;
-  border: 1px solid red;
+  border: 1px solid black;
 }
 
 .difficulty {
   padding: 5px;
-  border: 1px solid magenta;
+  border: 1px solid black;
+}
+
+.highlightChange {
+  color: yellow;
 }

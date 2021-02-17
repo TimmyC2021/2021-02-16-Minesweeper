@@ -1,5 +1,6 @@
 // Mine box sizes
 $standard-size: 50px;
+$border-colors-dark: black;
 
 $counter-height: $standard-size;
 $counter-width: $standard-size;
@@ -13,3 +14,5 @@ $button-background-colour: yellow;
 $mine-cell-height: $standard-size;
 $mine-cell-width: $standard-size;
 $mine-cell-background-colour: grey;
+
+$waiting-to-apply-colour: yellow;

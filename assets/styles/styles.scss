@@ -69,7 +69,7 @@
 
 }
 
-.mine {
+.game-area__mine {
   width: $mine-cell-width;
   height: $mine-cell-height;
   border: 1px solid darkgrey;
@@ -77,22 +77,29 @@
   background-color: $mine-cell-background-colour;
 }
 
-.mine:hover {
+.game-area__mine:hover {
   cursor: pointer;
 }
 
 .right-side {
   padding: 5px;
+  width: 170px;
   border: 1px solid green;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .game-size {
   padding: 5px;
-  border: 1px solid red;
+  border: 1px solid $border-colors-dark;
 }
+
 
 .difficulty {
   padding: 5px;
-  border: 1px solid magenta;
+  border: 1px solid $border-colors-dark;
+}
+
+.highlightChange {
+  color: $waiting-to-apply-colour;
 }

@@ -16,58 +16,89 @@
 <body>
   <main>
     <div class="main flex-container">mAIN
-      <!-- 
+      <!--                                        MAIN
 
-        MAIN
+      *******************************
+      *                             *
+      *                             *
+      *                             *
+      *                             *
+      *******************************
 
        -->
 
-       <!--                                       LEFT                                              -->
+       <!--                                       LEFT                                             
+      *******************************
+      *************                 *
+      *************                 *
+      *************                 *
+      *************                 *
+      *******************************                                                     -->
+
       <div class="left-side flex-container">lEFT sIDE
-        <div class="top-area flex-container"><!-- tOP aREA -->
+
+        <!-- tOP lEFT aREA
+        *******************************
+        *************                 *
+        *************                 *
+        *                             *
+        *                             *
+        *******************************                                                     -->
+  
+        <div class="top-area flex-container">
           <div class="top-area__counter" id="mines-left">mines</div>
           <div class="top-area__button" id="reset-button" onclick="resetPlay(event)">Let's play</div>
           <div class="top-area__counter" id="timer">timer</div>
         </div>
 
-        <!--                                                        GAME AREA -->
-        <!-- Most important part -->
+        <!--                                                        GAME AREA
+        *******************************
+        *                             *
+        *                             *
+        *************                 *
+        *************                 *
+        *******************************                                                     -->
+
         <div id="game-area" class="game-area grid-container">
           
-          <div class="mine" id="mine001"></div>
-          <div class="mine" id="mine002"></div>
-          <div class="mine" id="mine003"></div>
-          <div class="mine" id="mine004"></div>
-          <div class="mine" id="mine005"></div>
-          <div class="mine" id="mine006"></div>
-          <div class="mine" id="mine007"></div>
-          <div class="mine" id="mine008"></div>
-          <div class="mine" id="mine009"></div>
-          <div class="mine" id="mine010"></div>
-          <div class="mine" id="mine011"></div>
-          <div class="mine" id="mine012"></div>
-          <div class="mine" id="mine013"></div>
-          <div class="mine" id="mine014"></div>
-          <div class="mine" id="mine015"></div>
-          <div class="mine" id="mine016"></div>
-          <div class="mine" id="mine017"></div>
-          <div class="mine" id="mine018"></div>
-          <div class="mine" id="mine019"></div>
-          <div class="mine" id="mine020"></div>
-          <div class="mine" id="mine021"></div>
-          <div class="mine" id="mine022"></div>
-          <div class="mine" id="mine023"></div>
-          <div class="mine" id="mine024"></div>
-          <div class="mine" id="mine025"></div>
+          <!-- 
+          Example of what cells look like
+          <div class="game-area__mine" id="mine0101" onclick="mineField(event)"></div>
+          <div class="game-area__mine" id="mine0102" onclick="mineField(event)"></div>
+           -->
 
         </div>
       </div>
 
-      <!--                                                                           RIGHT         -->
-      <div class="right-side flex-container">rIGHT sIDE
-        <div class="game-size">gAME sIZE
+      <!--                                                                           RIGHT        
+      
+      *******************************
+      *                 *************
+      *                 *************
+      *                 *************
+      *                 *************
+      *******************************                                                     -->
+
+     <div class="right-side flex-container">
+        <div class="game-size"><p>Size</p> 
+              <input id="game-size__small" name="gameSize" type="radio" title="5 x 5" value="small" onclick="gameSize(event)" checked>
+              <label for="game-size__small" title="5 x 5">Small</label> <br>
+              <input id="game-size__medium" name="gameSize" type="radio" title="10 x 10" value="medium" onclick="gameSize(event)">
+              <label for="game-size__medium" title="10 x 10" >Medium</label> <br>
+              <input id="game-size__large" name="gameSize" type="radio" title="10 x 15" value="large" onclick="gameSize(event)">
+              <label for="game-size__large" title="15 x 30">Large</label> <br>
+              <!--             
+            <input id="game-size__custom" name="gameSize" type="radio" title="custom" value="custom">
+            <label for="game-size__custom">Custom</label> <br>
+             -->
         </div>
-      <div class="difficulty">dIFFICULTY
+      <div class="difficulty"><p>Difficulty</p>
+        <input id="difficulty__easy" name="difficulty" type="radio" value="easy" onclick="difficulty(event)" checked>
+        <label for="difficulty__easy">Easy</label> <br>
+        <input id="difficulty__medium" name="difficulty" type="radio" value="medium" onclick="difficulty(event)">
+        <label for="difficulty__medium" >Medium</label> <br>
+        <input id="difficulty__hard" name="difficulty" type="radio" value="hard" onclick="difficulty(event)">
+        <label for="difficulty__hard">Hard</label> <br>
 
       </div>
       </div>
