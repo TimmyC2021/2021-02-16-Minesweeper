@@ -1,22 +1,25 @@
 
 
 
-
-
-
-
 // Functions that get information =============================================
 
 
-  // Size of grid
+  // When the user changes the game size selection
 
-    const getSize = () => {
+  function gameSize() {
+    console.log("gameSize function");
+    // Does nothing yet, work done elsewhere
+  }
 
-      // reads the title of the relevant radio button
-      // it expects it to be in a format "row x column" with spaces around the x
+// Size of grid
 
-      return document.querySelector("input[name=gameSize]:checked").title.split(' x ');
-    }
+  const getSize = () => {
+
+    // reads the title of the relevant radio button
+    // it expects it to be in a format "row x column" with spaces around the x
+
+    return document.querySelector("input[name=gameSize]:checked").title.split(' x ');
+  }
       
 
 
@@ -32,6 +35,9 @@
 
   // Is number already in array
 
+
+  //  ******************* Not working yet
+  //  ******************* Intended to be used with mine seeder
   const checkList = (listArr,numCheck) => {
     listArr.find(numberItem=>numberItem==numCheck)
   }
@@ -54,9 +60,8 @@
       let gridInnerHtml = "";
       let gridColumns = "";
     
-      let minesArr = mineList();
-      console.log(minesArr);
-      // Create the string for the inner HTML
+      
+    // Below creates the string for the inner HTML
 
       for (let rowIndex=1; rowIndex <= rowsX; rowIndex++ ) {
         for (let columnIndex = 1; columnIndex <= columnsY; columnIndex++) {
@@ -91,18 +96,26 @@
         }
       }
 
-        // Generate a string to set the correct column spacings in the grid-box for game-area
-        for (let index=0; index < columnsY; index++) {
-          gridColumns = gridColumns + " 1fr"
-        }
-
-        // Set both the column styling for the grid and the HTML for the cells
-        let gameArea = document.getElementById('game-area');
-        gameArea.style.gridTemplateColumns = gridColumns;
-        gameArea.innerHTML = gridInnerHtml;
+    // Generate a string to set the correct column spacings in the grid-box for game-area
+      for (let index=0; index < columnsY; index++) {
+        gridColumns = gridColumns + " 1fr"
       }
 
-    // Calculate nearby mines for every cell without a mine
+    // Set both the column styling for the grid and the HTML for the cells
+      let gameArea = document.getElementById('game-area');
+      gameArea.style.gridTemplateColumns = gridColumns;
+      gameArea.innerHTML = gridInnerHtml;
+    
+    // Time to seed with mines
+      let minesArr = mineList();
+      
+      minesArr.forEach(setMine);
+      // let minesArrCoOrds = minesArr.map(mineCoord(mine,maxColumns));
+      // console.log(`Array for populating mines: ${minesArrCoOrds}`);    
+    
+    }
+
+  // Calculate nearby mines for every cell without a mine
     // Need to go around the surrounding 8 (max) cells looking for mines (value=9)
 
   // How to systematically work outwards from selected cell??
@@ -110,28 +123,56 @@
     // Perhaps use an array of cells to be checked
 
 
+  // Place mines in minefield
+
+    const setMine = (value) => {
+      // let mineId = `mine${mineCoord(value,maxColumns)[0]}${mineCoord(value,maxColumns)[1]}`;
+      // const thisCell = document.getElementById(mineId);
+      // const thisCellBomb = thisCell.getElementsByClassName('mineNumber')[0];
+      // thisCellBomb.innerHTML = '9';
+    }
+
+  
+
     
-  // Mine seeding
+  // Create list of mines to be placed
 
-  function mineList() {
+    function mineList() {
 
-    // Easy = 10% of squares
-    // Medium = 15% of squares
-    // Hard = 20% of squares
+      // Easy = 10% of squares
+      // Medium = 15% of squares
+      // Hard = 20% of squares
 
-    // let mineListArr = [];
-    // let randomNum = 0;
-    // let index = 0;
-    // const numberMines = Math.ceil(totalCells * 0.10);
-    // do {
-    //   randomNum = Math.ceil(Math.random() * totalCells);
-    //   if (checkList(mineListArr,randomNum)) {
-    //     mineListArr.push(randomNum);
-    //     index++;
-    //   }
-    // }
-    // while (index < numberMines);
-  }
+      return [1,2,13,19];
+      // let mineListArr = [];
+      // let randomNum = 0;
+      // let index = 0;
+      // const numberMines = Math.ceil(totalCells * 0.10);
+      // do {
+      //   randomNum = Math.ceil(Math.random() * totalCells);
+      //   if (checkList(mineListArr,randomNum)) {
+      //     mineListArr.push(randomNum);
+      //     index++;
+      //   }
+      // }
+      // while (index < numberMines);
+    }
+
+
+  // function to translate cell number to co-ordinates
+
+    const mineCoord = (cellNum,columnWide) => {
+      // Need to return a row and column
+      // const colNum = cellNum % columnWide;
+      // const rowNum = ((cellNum - colNum) / columnWide) + 1;
+      // return [rowNum, colNum];
+    }
+
+  // function to translate cell co-ordinates to number
+
+    const mineNumber = (rowNum, colNum, columnWidth) => {
+      return (rowNum * columnWidth) + colNum;
+    }
 
     
 
@@ -226,13 +267,6 @@
       }
     }
   
-
-  // When the user changes the game size selection
-
-    function gameSize() {
-  
-      // Does nothing yet, work done elsewhere
-    }
 
 
 // Initiate some global variables =============================================

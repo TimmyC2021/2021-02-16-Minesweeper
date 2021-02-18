@@ -1,7 +1,12 @@
 "use strict";
 
 // Functions that get information =============================================
-// Size of grid
+// When the user changes the game size selection
+function gameSize() {
+  console.log("gameSize function"); // Does nothing yet, work done elsewhere
+} // Size of grid
+
+
 var getSize = function getSize() {
   // reads the title of the relevant radio button
   // it expects it to be in a format "row x column" with spaces around the x
@@ -12,6 +17,8 @@ var getSize = function getSize() {
 var difficulty = function difficulty(event) {
   return document.querySelector("input[name=difficulty]:checked").value;
 }; // Is number already in array
+//  ******************* Not working yet
+//  ******************* Intended to be used with mine seeder
 
 
 var checkList = function checkList(listArr, numCheck) {
@@ -28,9 +35,7 @@ var createGrid = function createGrid(rowsX, columnsY) {
   // Game to offer 3 levels of difficulty. Easy, Medium, Hard
   // These reflect a density of mines, so total number may change with size of grid for the same level of difficulty
   var gridInnerHtml = "";
-  var gridColumns = "";
-  var minesArr = mineList();
-  console.log(minesArr); // Create the string for the inner HTML
+  var gridColumns = ""; // Below creates the string for the inner HTML
 
   for (var rowIndex = 1; rowIndex <= rowsX; rowIndex++) {
     for (var columnIndex = 1; columnIndex <= columnsY; columnIndex++) {
@@ -58,31 +63,55 @@ var createGrid = function createGrid(rowsX, columnsY) {
 
   var gameArea = document.getElementById('game-area');
   gameArea.style.gridTemplateColumns = gridColumns;
-  gameArea.innerHTML = gridInnerHtml;
+  gameArea.innerHTML = gridInnerHtml; // Time to seed with mines
+
+  var minesArr = mineList();
+  minesArr.forEach(setMine); // let minesArrCoOrds = minesArr.map(mineCoord(mine,maxColumns));
+  // console.log(`Array for populating mines: ${minesArrCoOrds}`);    
 }; // Calculate nearby mines for every cell without a mine
 // Need to go around the surrounding 8 (max) cells looking for mines (value=9)
 // How to systematically work outwards from selected cell??
 // This routine may need to be called from different sections
 // Perhaps use an array of cells to be checked
-// Mine seeding
+// Place mines in minefield
 
 
-function mineList() {} // Easy = 10% of squares
-// Medium = 15% of squares
-// Hard = 20% of squares
-// let mineListArr = [];
-// let randomNum = 0;
-// let index = 0;
-// const numberMines = Math.ceil(totalCells * 0.10);
-// do {
-//   randomNum = Math.ceil(Math.random() * totalCells);
-//   if (checkList(mineListArr,randomNum)) {
-//     mineListArr.push(randomNum);
-//     index++;
-//   }
-// }
-// while (index < numberMines);
-// Functions that respond to actions or events ===============================
+var setMine = function setMine(value) {} // let mineId = `mine${mineCoord(value,maxColumns)[0]}${mineCoord(value,maxColumns)[1]}`;
+// const thisCell = document.getElementById(mineId);
+// const thisCellBomb = thisCell.getElementsByClassName('mineNumber')[0];
+// thisCellBomb.innerHTML = '9';
+// Create list of mines to be placed
+;
+
+function mineList() {
+  // Easy = 10% of squares
+  // Medium = 15% of squares
+  // Hard = 20% of squares
+  return [1, 2, 13, 19]; // let mineListArr = [];
+  // let randomNum = 0;
+  // let index = 0;
+  // const numberMines = Math.ceil(totalCells * 0.10);
+  // do {
+  //   randomNum = Math.ceil(Math.random() * totalCells);
+  //   if (checkList(mineListArr,randomNum)) {
+  //     mineListArr.push(randomNum);
+  //     index++;
+  //   }
+  // }
+  // while (index < numberMines);
+} // function to translate cell number to co-ordinates
+
+
+var mineCoord = function mineCoord(cellNum, columnWide) {} // Need to return a row and column
+// const colNum = cellNum % columnWide;
+// const rowNum = ((cellNum - colNum) / columnWide) + 1;
+// return [rowNum, colNum];
+// function to translate cell co-ordinates to number
+;
+
+var mineNumber = function mineNumber(rowNum, colNum, columnWidth) {
+  return rowNum * columnWidth + colNum;
+}; // Functions that respond to actions or events ===============================
 // Let's play  ===  big Yellow button
 
 
@@ -145,11 +174,7 @@ function mineRightClick(event) {
       thisCellNumber.style.visibility = 'hidden';
     }
   }
-} // When the user changes the game size selection
-
-
-function gameSize() {} // Does nothing yet, work done elsewhere
-// Initiate some global variables =============================================
+} // Initiate some global variables =============================================
 
 
 var mouseTwoButtonCheck = 0;

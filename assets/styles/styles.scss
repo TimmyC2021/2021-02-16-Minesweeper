@@ -44,6 +44,7 @@
 
 .top-area__counter {
   border: 1px solid black;
+  border-radius: 15px;
   width: $counter-width;
   height: $counter-height;
   line-height: $counter-height;
@@ -56,6 +57,7 @@
   height: $button-height;
   margin: auto;
   border: 1px solid black;
+  border-radius: $button-height;
   line-height: $button-height;
   text-align: center;
   background-color: $button-background-colour;
