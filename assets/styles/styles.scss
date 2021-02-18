@@ -13,7 +13,7 @@
 
 .flex-container {
   display: flex;
-  border: 1px solid red;
+  // border: 1px solid red;
 }
 
 .grid-container {
@@ -26,17 +26,19 @@
   left: 50%;
   transform: translate(-50%,-50%);
   padding: 5px;
+  border: $mine-cell-background-colour 5px solid;
+  border-radius: 20px;
 }
 
 .left-side {
   padding: 5px;
-  border: 1px solid blue;
+  //border: 1px solid blue;
   flex-direction: column;
 }
 
 .top-area {
   padding: 5px;
-  border: 1px solid red;
+  //border: 1px solid red;
   justify-content: space-around;
 }
 
@@ -63,41 +65,73 @@
   cursor: pointer;
 }
 .game-area {
-  padding: 5px;
-  border: 1px solid purple;
+  padding: 0px;
+  border: 5px solid black;
+  border-radius: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
 }
 
 .game-area__mine {
   width: $mine-cell-width;
   height: $mine-cell-height;
+  line-height: $mine-cell-height;
+  padding: 0;
+  margin: 0;
+  text-align: center;
   border: 1px solid darkgrey;
   border-style: inset;
   background-color: $mine-cell-background-colour;
-}
+  position: relative;
+  }
 
 .game-area__mine:hover {
   cursor: pointer;
 }
 
+.fa-flag {
+  color: red;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  visibility: $mine-cell-items-visibilty;
+}
+
+.fa-bomb {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  visibility: $mine-cell-items-visibilty;
+}
+
+.mineNumber {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 0px;
+  bottom: 10px;
+  visibility: $mine-cell-items-visibilty;
+  color: green;
+}
+
 .right-side {
-  padding: 5px;
+  padding: 0px;
   width: 170px;
-  border: 1px solid green;
+  //border: 1px solid green;
   flex-direction: column;
   justify-content: space-around;
 }
 
 .game-size {
-  padding: 5px;
+  padding: px;
   border: 1px solid $border-colors-dark;
+  border-radius: 15px;
 }
 
 
 .difficulty {
   padding: 5px;
   border: 1px solid $border-colors-dark;
+  border-radius: 15px;
 }
 
 .highlightChange {
