@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
   
+  <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="./assets/styles/styles.css">
   <script src="./assets/javascript/script.js" async defer></script>
       
@@ -50,7 +51,7 @@
   
         <div class="top-area flex-container">
           <div class="top-area__counter" id="mines-left">mines</div>
-          <div class="top-area__button" id="reset-button" onclick="resetPlay(event)">Let's play</div>
+          <div class="top-area__button" id="reset-button" onclick="startGame(event)">Let's play</div>
           <div class="top-area__counter" id="timer">timer</div>
         </div>
 
@@ -84,11 +85,11 @@
 
      <div class="right-side flex-container">
         <div class="game-size"><p>Size</p> 
-              <input id="game-size__small" name="gameSize" type="radio" title="5 x 5" value="small" onclick="gameSize(event)" checked>
+              <input id="game-size__small" name="gameSize" type="radio" title="5 x 5" value="small" onclick="gameSizeChange(event)" checked>
               <label for="game-size__small" title="5 x 5">Small</label> <br>
-              <input id="game-size__medium" name="gameSize" type="radio" title="10 x 10" value="medium" onclick="gameSize(event)">
+              <input id="game-size__medium" name="gameSize" type="radio" title="10 x 10" value="medium" onclick="gameSizeChange(event)">
               <label for="game-size__medium" title="10 x 10" >Medium</label> <br>
-              <input id="game-size__large" name="gameSize" type="radio" title="10 x 15" value="large" onclick="gameSize(event)">
+              <input id="game-size__large" name="gameSize" type="radio" title="10 x 15" value="large" onclick="gameSizeChange(event)">
               <label for="game-size__large" title="15 x 30">Large</label> <br>
               <!--             
             <input id="game-size__custom" name="gameSize" type="radio" title="custom" value="custom">
@@ -96,11 +97,11 @@
              -->
         </div>
       <div class="difficulty"><p>Difficulty</p>
-        <input id="difficulty__easy" name="difficulty" type="radio" value="easy" onclick="difficulty(event)" checked>
+        <input id="difficulty__easy" name="difficulty" type="radio" value="easy" onclick="difficultyChange(event)" checked>
         <label for="difficulty__easy">Easy</label> <br>
-        <input id="difficulty__medium" name="difficulty" type="radio" value="medium" onclick="difficulty(event)">
+        <input id="difficulty__medium" name="difficulty" type="radio" value="medium" onclick="difficultyChange(event)">
         <label for="difficulty__medium" >Medium</label> <br>
-        <input id="difficulty__hard" name="difficulty" type="radio" value="hard" onclick="difficulty(event)">
+        <input id="difficulty__hard" name="difficulty" type="radio" value="hard" onclick="difficultyChange(event)">
         <label for="difficulty__hard">Hard</label> <br>
 
       </div>
