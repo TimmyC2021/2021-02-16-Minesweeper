@@ -91,8 +91,7 @@
 
         gridInnerHtml = ` 
           ${gridInnerHtml} 
-          <div class="game-area__mine" id="mine${rowsString}${columnString}" onclick="mineLeftClick(event)"
-          oncontextmenu= "mineRightClick(event)">
+          <div class="game-area__mine" id="mine${rowsString}${columnString}">
           <span class="mineNumber">8</span>
           <i class="fas fa-bomb"></i>
           <i class="fas fa-flag"></i></div>
@@ -137,11 +136,12 @@
       for (let rowIndex=1; rowIndex <= rowsX; rowIndex++ ) {
         for (let columnIndex = 1; columnIndex <= columnsY; columnIndex++) {
           const myCellStatus = myCell(rowIndex,columnIndex);
+          myCellStatus.setEvents();
           mineCount = 0;
           if (myCellStatus.numberValue < 9) {
             // Count the mines surrounding
             border(rowIndex, rowsX, columnIndex, columnsY).forEach( (rowCol) => {
-              myCellBorder = myCell(rowCol[0],rowCol[1]);
+              let myCellBorder = myCell(rowCol[0],rowCol[1]);
               if (myCellBorder.numberValue == 9) mineCount++;
             });
             myCellStatus.setNumberValue(mineCount);
@@ -237,7 +237,7 @@
 
         if (!(rowIndex1 == rowCurrent && columnIndex1 == columnCurrent)) {
 
-          myCellGo = myCell(rowIndex1, columnIndex1,);
+          let myCellGo = myCell(rowIndex1, columnIndex1,);
 
           if (func == "Count") {
             if (myCellGo.numberValue == 9) mineCount++;
@@ -366,6 +366,7 @@
   
   function mineRightClick(event) {
   
+
     event.preventDefault();
     !isTimerRunning && timer();
     const myCellRight = myCell(0,0,event);
@@ -373,7 +374,7 @@
     const thisCellBomb = thisCell.getElementsByClassName('fa-bomb')[0];
     const thisCellFlag = thisCell.getElementsByClassName('fa-flag')[0];
     const thisCellNumber = thisCell.getElementsByClassName('mineNumber')[0];
-    
+  
     // if event.buttons = 1 then the left button is being held down while clicking the right
     mouseTwoButtonCheck = event.buttons;
     
@@ -406,6 +407,7 @@
         thisCellNumber.style.visibility = 'hidden';
       }
     }
+    
   }
   
 
@@ -449,7 +451,7 @@
   let maxRows = getSize()[0];
   let maxColumns = getSize()[1];
   let totalCells = maxRows * maxColumns;
-  // let minesCount = 0;
+  let minesCount = 0;
 
   class MinesCount {
     constructor (minesCount) {
@@ -503,6 +505,10 @@
     }
     setNumberValue (value) {
       this.numberID.innerHTML = value
+    }
+    setEvents () {
+      this.cellID.addEventListener('click', ()=> mineLeftClick(event));
+      this.cellID.addEventListener('contextmenu', ()=> mineRightClick(event));
     }
   }
 
