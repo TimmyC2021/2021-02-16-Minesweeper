@@ -43,6 +43,26 @@
 
 /// Functions that do something =========================================
 
+  let isTimerRunning;  
+  isTimerRunning = false;
+
+  const timer = () => {
+    let start;
+    start = Date.now();
+    setInterval(()=>{
+      if (isTimerRunning == false) {
+        clearInterval();
+      }
+      const current = Date.now() - start;
+      const seconds = Math.floor(current / 1000);
+      document.getElementById('timer').innerHTML = seconds;
+
+    },1000);
+    
+
+  }
+
+
 
   /// Function to create new grid
 
@@ -221,6 +241,7 @@
             
             if (myCellGo.numberValue == 0 && (myCellGo.numberStatus == 'hidden' || myCellGo.numberStatus == '')) {
               myCellGo.setNumberVisibility('visible');
+              myCellGo.setZeroNumberVisibility();
               myCellGo.setFlagVisibility('hidden');
               goAround(rowIndex1, rowMax, columnIndex1, columnMax, "CheckCells");
             } else {
@@ -272,6 +293,10 @@
 
   function startGame(event) {
     
+    
+    isTimerRunning = false;
+    document.getElementById('timer').innerHTML = '0';
+
     // Check the size of grid required
     maxRows = getSize()[0];
     maxColumns = getSize()[1];
@@ -289,6 +314,7 @@
   
   function mineLeftClick(event) {
   
+    !isTimerRunning && timer();
     if (mouseTwoButtonCheck !== 1) {
 
       /// Cell is either hidden or red flagged
@@ -315,6 +341,7 @@
         } else {
           //It's clear. Check around
           cellLeftClick.setNumberVisibility('visible');
+          cellLeftClick.setZeroNumberVisibility();
           let rowEvent = event.currentTarget.id.slice(4,6);
           let columnEvent = event.currentTarget.id.slice(6,8);
           let checkCells = [[rowEvent,columnEvent]];
@@ -335,6 +362,7 @@
   function mineRightClick(event) {
   
     event.preventDefault();
+    !isTimerRunning && timer();
     const myCellRight = myCell(0,0,event);
     const thisCell = document.getElementById(event.currentTarget.id);
     const thisCellBomb = thisCell.getElementsByClassName('fa-bomb')[0];
@@ -376,7 +404,7 @@
   
 
   const myCell = (row, column, event) => {
-    let thisCell;
+    let thisCellID;
     let rowsString;
     let columnString;
     if ( row == 0) {
@@ -432,7 +460,11 @@
       this.flagID.style.visibility = value
     }
     setNumberVisibility (value) {
-      this.numberID.style.visibility = value
+      this.numberID.style.visibility = value;
+      this.cellID.style.background = 'green';
+    }
+    setZeroNumberVisibility (value) {
+      this.numberID.style.color = 'green'
     }
     setNumberValue (value) {
       this.numberID.innerHTML = value

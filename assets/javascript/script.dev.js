@@ -32,7 +32,24 @@ var checkList = function checkList(listArr, numCheck) {
     return numberItem == numCheck;
   });
 }; /// Functions that do something =========================================
-/// Function to create new grid
+
+
+var isTimerRunning;
+isTimerRunning = false;
+
+var timer = function timer() {
+  var start;
+  start = Date.now();
+  setInterval(function () {
+    if (isTimerRunning == false) {
+      clearInterval();
+    }
+
+    var current = Date.now() - start;
+    var seconds = Math.floor(current / 1000);
+    document.getElementById('timer').innerHTML = seconds;
+  }, 1000);
+}; /// Function to create new grid
 
 
 var createGrid = function createGrid(rowsX, columnsY) {
@@ -176,6 +193,7 @@ var goAround = function goAround(rowCurrent, rowMax, columnCurrent, columnMax, f
         } else if (func == "CheckCells") {
           if (myCellGo.numberValue == 0 && (myCellGo.numberStatus == 'hidden' || myCellGo.numberStatus == '')) {
             myCellGo.setNumberVisibility('visible');
+            myCellGo.setZeroNumberVisibility();
             myCellGo.setFlagVisibility('hidden');
             goAround(rowIndex1, rowMax, columnIndex1, columnMax, "CheckCells");
           } else {
@@ -219,7 +237,9 @@ var border = function border(rowCurrent, rowMax, columnCurrent, columnMax) {
 
 
 function startGame(event) {
-  // Check the size of grid required
+  isTimerRunning = false;
+  document.getElementById('timer').innerHTML = '0'; // Check the size of grid required
+
   maxRows = getSize()[0];
   maxColumns = getSize()[1]; // Create the grid using size from above
 
@@ -229,6 +249,8 @@ function startGame(event) {
 
 
 function mineLeftClick(event) {
+  !isTimerRunning && timer();
+
   if (mouseTwoButtonCheck !== 1) {
     /// Cell is either hidden or red flagged
     /// red flag = do nothing
@@ -251,6 +273,7 @@ function mineLeftClick(event) {
       } else {
         //It's clear. Check around
         cellLeftClick.setNumberVisibility('visible');
+        cellLeftClick.setZeroNumberVisibility();
         var rowEvent = event.currentTarget.id.slice(4, 6);
         var columnEvent = event.currentTarget.id.slice(6, 8);
         var checkCells = [[rowEvent, columnEvent]];
@@ -266,6 +289,7 @@ function mineLeftClick(event) {
 
 function mineRightClick(event) {
   event.preventDefault();
+  !isTimerRunning && timer();
   var myCellRight = myCell(0, 0, event);
   var thisCell = document.getElementById(event.currentTarget.id);
   var thisCellBomb = thisCell.getElementsByClassName('fa-bomb')[0];
@@ -298,7 +322,7 @@ function mineRightClick(event) {
 }
 
 var myCell = function myCell(row, column, event) {
-  var thisCell;
+  var thisCellID;
   var rowsString;
   var columnString;
 
@@ -364,6 +388,12 @@ function () {
     key: "setNumberVisibility",
     value: function setNumberVisibility(value) {
       this.numberID.style.visibility = value;
+      this.cellID.style.background = 'green';
+    }
+  }, {
+    key: "setZeroNumberVisibility",
+    value: function setZeroNumberVisibility(value) {
+      this.numberID.style.color = 'green';
     }
   }, {
     key: "setNumberValue",
