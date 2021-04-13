@@ -13,6 +13,7 @@
   <link rel="shortcut icon" href="">
   <link rel="stylesheet" href="./assets/styles/styles.css">
   <script src="./assets/javascript/script.js" type="module" async defer></script>
+  <script src="./assets/javascript/class.js" type="module" async defer></script>
       
   <title>Minesweeper</title>
   
@@ -51,7 +52,7 @@
   
         <div class="top-area flex-container">
           <div class="top-area__counter" id="mines-left">mines</div>
-          <div class="top-area__button" id="reset-button" onclick="startGame(event)">Let's play</div>
+          <div class="top-area__button" id="reset-button" >Let's play</div>
           <div class="top-area__counter" id="timer">timer</div>
         </div>
 
@@ -85,11 +86,11 @@
 
      <div class="right-side flex-container">
         <div class="game-size"><p>Size</p> 
-              <input id="game-size__small" name="gameSize" type="radio" title="5 x 5" value="small" onclick="gameSizeChange(event)" checked>
+              <input id="game-size__small" name="gameSize" type="radio" title="5 x 5" value="small"  checked>
               <label for="game-size__small" title="5 x 5">Small</label> <br>
-              <input id="game-size__medium" name="gameSize" type="radio" title="10 x 10" value="medium" onclick="gameSizeChange(event)">
+              <input id="game-size__medium" name="gameSize" type="radio" title="10 x 10" value="medium" >
               <label for="game-size__medium" title="10 x 10" >Medium</label> <br>
-              <input id="game-size__large" name="gameSize" type="radio" title="10 x 15" value="large" onclick="gameSizeChange(event)">
+              <input id="game-size__large" name="gameSize" type="radio" title="10 x 15" value="large" >
               <label for="game-size__large" title="15 x 30">Large</label> <br>
               <!--             
             <input id="game-size__custom" name="gameSize" type="radio" title="custom" value="custom">
