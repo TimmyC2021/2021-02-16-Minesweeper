@@ -14,3 +14,5 @@ all the surrounding squares will be automatically tested.
 If you suspect a square has a mine in it then right click the mouse on
 the square to mark it with a flag.
 
+Play the gan here:
+https://timmyc2021.github.io/2021-02-16-Minesweeper/
