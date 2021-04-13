@@ -89,7 +89,8 @@ var createGrid = function createGrid(rowsX, columnsY) {
   gameArea.style.gridTemplateColumns = gridColumns;
   gameArea.innerHTML = gridInnerHtml; /// Time to seed with mines
 
-  var minesArr = mineList(); //unshift to insert columnWidth at index=0 - way of passing 2 parameters
+  var minesArr = mineList();
+  document.getElementById('mines-left').innerHTML = minesCount.number; //unshift to insert columnWidth at index=0 - way of passing 2 parameters
 
   minesArr.unshift(parseInt(maxColumns));
   minesArr.forEach(setMine); /// Calculate nearby mines for every cell without a mine
@@ -114,13 +115,15 @@ var createGrid = function createGrid(rowsX, columnsY) {
   }
 };
 
-function mineList() {
+var mineList = function mineList() {
   /// Easy = 10% of squares
   /// Medium = 15% of squares
   /// Hard = 20% of squares
   // ****************************Not currently generating random list********************************
-  return [1, 2, 5, 13, 19];
-}
+  var mines = [1, 2, 5, 13, 19];
+  minesCount = new MinesCount(mines.length);
+  return mines;
+};
 
 var setMine = function setMine(value, index, array) {
   console.log("value: ".concat(value, " index: ").concat(index, " array: ").concat(array));
@@ -302,10 +305,12 @@ function mineRightClick(event) {
     // Just the right button
     if (myCellRight.numberStatus !== 'visible' && (myCellRight.flagStatus == 'hidden' || myCellRight.flagStatus == '')) {
       myCellRight.setFlagVisibility('visible');
-      myCellRight.setBombVisibility('hidden');
-      myCellRight.setNumberVisibility('hidden');
+      myCellRight.setBombVisibility('hidden'); // myCellRight.setNumberVisibility('hidden');
+
+      minesCount.subtract();
     } else {
       myCellRight.setFlagVisibility('hidden');
+      minesCount.add();
     }
   } else {
     // Left button down and right button click
@@ -322,15 +327,20 @@ function mineRightClick(event) {
 }
 
 var myCell = function myCell(row, column, event) {
+  // Two ways of calling this
+  // 1. Provide a valid row and column value to address a specific cell. (event ignored)
+  // 2. Set row=0 and provide an event (column ignored). The event can be used to identify the square selected
   var thisCellID;
   var rowsString;
   var columnString;
 
   if (row == 0) {
+    // using event
     thisCellID = document.getElementById(event.currentTarget.id);
     rowsString = thisCellID.id.slice(4, 6);
     columnString = thisCellID.id.slice(6, 8);
   } else {
+    // using row and column
     rowsString = row.toString().padStart(2, "0");
     columnString = column.toString().padStart(2, "0");
     var mineID = "mine".concat(rowsString).concat(columnString);
@@ -352,7 +362,44 @@ var myCell = function myCell(row, column, event) {
 var mouseTwoButtonCheck = 0;
 var maxRows = getSize()[0];
 var maxColumns = getSize()[1];
-var totalCells = maxRows * maxColumns;
+var totalCells = maxRows * maxColumns; // let minesCount = 0;
+
+var MinesCount =
+/*#__PURE__*/
+function () {
+  function MinesCount(minesCount) {
+    _classCallCheck(this, MinesCount);
+
+    this.number = minesCount;
+  }
+
+  _createClass(MinesCount, [{
+    key: "add",
+    value: function add() {
+      this.number = this.number + 1;
+      this.update();
+    }
+  }, {
+    key: "subtract",
+    value: function subtract() {
+      this.number = this.number - 1;
+      this.update();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      document.getElementById('mines-left').innerHTML = this.number;
+
+      if (this.number < 0) {
+        document.getElementById('mines-left').style.color = 'red';
+      } else {
+        document.getElementById('mines-left').style.color = 'black';
+      }
+    }
+  }]);
+
+  return MinesCount;
+}();
 
 var MyCell =
 /*#__PURE__*/

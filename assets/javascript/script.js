@@ -125,9 +125,11 @@
     
     /// Time to seed with mines
       let minesArr = mineList();
+      document.getElementById('mines-left').innerHTML = minesCount.number;
       //unshift to insert columnWidth at index=0 - way of passing 2 parameters
       minesArr.unshift(parseInt(maxColumns));
       minesArr.forEach(setMine);
+      
     
     /// Calculate nearby mines for every cell without a mine
     /// Need to go around the surrounding 8 (max) cells looking for mines (value=9)
@@ -149,14 +151,17 @@
     }
 
 
-  function mineList() {
+  const mineList = () => {
 
     /// Easy = 10% of squares
     /// Medium = 15% of squares
     /// Hard = 20% of squares
 
     // ****************************Not currently generating random list********************************
-    return [1,2,5,13,19];
+
+    let mines = [1,2,5,13,19];
+    minesCount = new MinesCount(mines.length);
+    return mines;
   }
 
 
@@ -380,10 +385,11 @@
       if (myCellRight.numberStatus !== 'visible' && ( myCellRight.flagStatus == 'hidden' || myCellRight.flagStatus == '')) {
         myCellRight.setFlagVisibility('visible');
         myCellRight.setBombVisibility('hidden');
-        myCellRight.setNumberVisibility('hidden');
-
+        // myCellRight.setNumberVisibility('hidden');
+        minesCount.subtract();
       } else {
         myCellRight.setFlagVisibility('hidden');
+        minesCount.add();
       }
     }
     else {
@@ -404,15 +410,21 @@
   
 
   const myCell = (row, column, event) => {
+    // Two ways of calling this
+    // 1. Provide a valid row and column value to address a specific cell. (event ignored)
+    // 2. Set row=0 and provide an event (column ignored). The event can be used to identify the square selected
+
     let thisCellID;
     let rowsString;
     let columnString;
     if ( row == 0) {
+      // using event
       thisCellID = document.getElementById(event.currentTarget.id);
       rowsString = thisCellID.id.slice(4,6);
       columnString = thisCellID.id.slice(6,8);
       
     } else {
+      // using row and column
       rowsString = row.toString().padStart(2,"0");
       columnString = column.toString().padStart(2,"0");
       const mineID = `mine${rowsString}${columnString}`;
@@ -437,6 +449,29 @@
   let maxRows = getSize()[0];
   let maxColumns = getSize()[1];
   let totalCells = maxRows * maxColumns;
+  // let minesCount = 0;
+
+  class MinesCount {
+    constructor (minesCount) {
+      this.number = minesCount;
+    }
+    add() {
+      this.number = this.number + 1;
+      this.update();
+    }
+    subtract(){
+      this.number = this.number - 1;
+      this.update();
+    }
+    update(){
+      document.getElementById('mines-left').innerHTML = this.number
+      if (this.number < 0) {
+        document.getElementById('mines-left').style.color = 'red'
+      } else {
+        document.getElementById('mines-left').style.color = 'black'
+      }
+    }
+  }
 
   class MyCell {
     constructor( cellID, row, column, bombID, bombStatus, flagID, flagStatus, numberID, numberStatus, numberValue) {
